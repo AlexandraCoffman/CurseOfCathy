@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     [Header("Door Settings")]
     public GameObject doorToOpen; 
     
-    private int totalOrbs;
-    private int collectedOrbs = 0;
+    public int totalOrbs;
+    public int collectedOrbs = 0;
 
     private void Awake()
     {

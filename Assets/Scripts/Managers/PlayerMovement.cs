@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private bool isHoldingShift;
+    public Animator animator;
+    private string currentAnimation;
 
     [Header("Stamina Settings")]
     public int maxStamina = 6;
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         // --- NEW INPUT SYSTEM LOGIC --- //
         movement = Vector2.zero;
         isHoldingShift = false;
@@ -57,8 +60,49 @@ public class PlayerMovement : MonoBehaviour
         // Normalize so diagonal movement isn't faster than walking in a straight line
         movement = movement.normalized;
 
+        UpdateAnimation();
+
         HandleStaminaMath();
     }
+
+    private void UpdateAnimation()
+{
+    if (animator == null) 
+    {
+        Debug.Log("ANIMATOR IS NULL - returning early!");
+        return;
+    }
+
+    bool isTryingToSprint = isHoldingShift && movement != Vector2.zero && currentStamina > 0 && !isCaffeinated;
+    string prefix = isTryingToSprint ? "dash" : "walk";
+
+    string clipToPlay = "";
+    
+    if (movement == Vector2.zero)
+        clipToPlay = "walk_down";
+    else if (movement.x > 0 && movement.y > 0)
+        clipToPlay = prefix + "_rightup";
+    else if (movement.x > 0 && movement.y < 0)
+        clipToPlay = prefix + "_rightdown";
+    else if (movement.x < 0 && movement.y > 0)
+        clipToPlay = prefix + "_leftup";
+    else if (movement.x < 0 && movement.y < 0)
+        clipToPlay = prefix + "_leftdown";
+    else if (movement.x > 0)
+        clipToPlay = prefix + "_rightup";
+    else if (movement.x < 0)
+        clipToPlay = prefix + "_leftup";
+    else if (movement.y > 0)
+        clipToPlay = prefix + "_up";
+    else if (movement.y < 0)
+        clipToPlay = prefix + "_down";
+
+    if (clipToPlay != currentAnimation)
+    {
+        currentAnimation = clipToPlay;
+        animator.Play(clipToPlay);
+    }
+}
 
     void FixedUpdate()
     {

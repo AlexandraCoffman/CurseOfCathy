@@ -41,6 +41,8 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Enemy collided with: " + collision.gameObject.name + " Tag: " + collision.gameObject.tag);
+        
         if (collision.gameObject.CompareTag("Player")) {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             

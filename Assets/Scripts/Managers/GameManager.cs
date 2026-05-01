@@ -1,7 +1,7 @@
 using UnityEngine;
-using TMPro; 
+using TMPro;
 using UnityEngine.SceneManagement;
-// Game Manager
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -11,22 +11,24 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
 
     [Header("UI Settings")]
-    public TextMeshProUGUI orbText; 
-    public GameObject levelCompletePanel; 
+    public TextMeshProUGUI orbText;
+    public GameObject levelCompletePanel;
     public GameObject gameOverPanel;
 
     [Header("Door Settings")]
-    public GameObject doorToOpen; 
-    
-    private int totalOrbs;
-    private int collectedOrbs = 0;
+    public GameObject doorToOpen;
+
+    public int totalOrbs;
+    public int collectedOrbs = 0;
 
     private void Awake()
     {
-        if (Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
         }
-        else {
+        else
+        {
             Destroy(gameObject);
         }
     }
@@ -35,12 +37,15 @@ public class GameManager : MonoBehaviour
     {
         isLevelComplete = false;
         isGameOver = false;
-        Time.timeScale = 1f; 
-        
-        if (levelCompletePanel != null) {
+        Time.timeScale = 1f;
+
+        if (levelCompletePanel != null)
+        {
             levelCompletePanel.SetActive(false);
         }
-        if (gameOverPanel != null){
+
+        if (gameOverPanel != null)
+        {
             gameOverPanel.SetActive(false);
         }
 
@@ -53,49 +58,60 @@ public class GameManager : MonoBehaviour
         collectedOrbs++;
         UpdateUI();
 
-        if (collectedOrbs >= totalOrbs) {
+        if (collectedOrbs >= totalOrbs)
+        {
             OpenDoor();
         }
     }
 
     private void UpdateUI()
     {
-        if (orbText != null) {
+        if (orbText != null)
+        {
             orbText.text = "Orbs: " + collectedOrbs + " / " + totalOrbs;
         }
     }
 
     private void OpenDoor()
     {
-        if (doorToOpen != null) {
-            doorToOpen.SetActive(false); 
+        if (doorToOpen != null)
+        {
+            doorToOpen.SetActive(false);
         }
     }
 
     public void LevelComplete()
     {
-        if (isGameOver){
-            return; 
+        if (isGameOver)
+        {
+            return;
         }
 
         isLevelComplete = true;
-        if (levelCompletePanel != null) {
+
+        if (levelCompletePanel != null)
+        {
             levelCompletePanel.SetActive(true);
         }
-        Time.timeScale = 0f; 
+
+        Time.timeScale = 0f;
     }
 
     public void GameOver()
     {
-        if (isLevelComplete){
-            return; 
+        if (isLevelComplete)
+        {
+            return;
         }
 
         isGameOver = true;
-        if (gameOverPanel != null) {
+
+        if (gameOverPanel != null)
+        {
             gameOverPanel.SetActive(true);
         }
-        Time.timeScale = 0f; 
+
+        Time.timeScale = 0f;
     }
 
     public void RestartLevel()
@@ -114,7 +130,8 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game...");
-        Application.Quit(); 
+        Debug.Log("Returning to Main Menu...");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("main menu");
     }
 }

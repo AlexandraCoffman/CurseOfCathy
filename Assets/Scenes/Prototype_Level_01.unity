@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 120174950}
   - component: {fileID: 120174952}
   - component: {fileID: 120174953}
+  - component: {fileID: 120174954}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -391,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   walkSpeed: 3
   sprintMultiplier: 1.6
+  animator: {fileID: 120174954}
   maxStamina: 3
   drainRate: 0.4
   recoverRate: 2
@@ -416,6 +418,28 @@ MonoBehaviour:
   - {fileID: 1294746356}
   - {fileID: 1480563313}
   invulnerabilityTime: 5
+--- !u!95 &120174954
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120174947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8bca9aa4cc274363b8d139a5d1433d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &131320189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2475176996650329121, guid: 29fddc91eb978408480e003aaa6d78b8, type: 3}
@@ -775,7 +799,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 6bf418798cd9844adac9ddacd5a9057c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 3bd02b6c278f04f2999bd76d052d9e25, type: 2}
 --- !u!1 &310351601
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,15 +827,15 @@ RectTransform:
   m_GameObject: {fileID: 310351601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1804677264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -863.5, y: -476.49997}
-  m_SizeDelta: {x: 1727, y: 953}
+  m_AnchoredPosition: {x: -2.9001465, y: 1.2999878}
+  m_SizeDelta: {x: 50.60022, y: 156.40002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &310351603
 MonoBehaviour:
@@ -3329,6 +3353,8 @@ GameObject:
   - component: {fileID: 606125727}
   - component: {fileID: 606125726}
   - component: {fileID: 606125731}
+  - component: {fileID: 606125732}
+  - component: {fileID: 606125733}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3518,6 +3544,40 @@ NavMeshAgent:
   m_BaseOffset: 0.16
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &606125732
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606125725}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 308b9d882fb3d49a7b694f8788895ea8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &606125733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606125725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8283d74385fdd429b97b50aa103886b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimation
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -4016,6 +4076,8 @@ MonoBehaviour:
   levelCompletePanel: {fileID: 531524113}
   gameOverPanel: {fileID: 462137840}
   doorToOpen: {fileID: 290095711}
+  totalOrbs: 0
+  collectedOrbs: 0
 --- !u!114 &766014995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8177,12 +8239,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 950, y: 951.72}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -8197,7 +8259,7 @@ Canvas:
   m_GameObject: {fileID: 1804677260}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
